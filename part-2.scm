@@ -33,7 +33,7 @@
   (define (read-string text)
   (read
     (open-input-string text)))
-  ; Using read-string, evaludate the lambda expression within the name space using
+  ; Using read-string, evaluate the lambda expression within the namespace using
   ; whatever arguments were supplied (args should be a list in this case)
   (apply
     (eval (read-string text-lambda) ns)
@@ -42,9 +42,9 @@
 ; Procedure for filtering input list based on expression
 (define (bool_filter expression lst)
     (cond ((null? lst) '())
-      ; If the current head of the list causes the lambda expressoin to return true
-      ; Then construct a new list using the head and the result of
-      ; a recursive call to the this procedure
+      #| If the current head of the list causes the lambda expression to return true,
+       then construct a new list using the head and the result of
+       a recursive call to the this procedure. |#
       ((call-string expression (car lst)) (cons (car lst) (bool_filter expression (cdr lst))))
     ; If the current head does not pass the lambda expression, continue on the rest of the list
     (else (bool_filter expression (cdr lst)))))

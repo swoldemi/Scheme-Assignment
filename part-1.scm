@@ -15,16 +15,14 @@
 (define input_list (read))
 
 ; Procedure to display all rotations of the list
-; A list with n elements has n unique rotations
+; A list with n elements has n unique singular rotations/shifts
 (define (rotate lst n)
   (cond ((> n 0) ; While there are more rotations to be done
     (begin
       (display lst) ; Display the current rotation
-      #| 
-         Decrement n and make another recursive call on the current rotation.
-         Appending everything but first element of the list to the end of
-         everything but the first element of the list of
-      |#
+         #| Move the first element of the list to the end and
+         Decrement n and before making another recursive call to
+         yield the next rotation. |#
       (rotate (append (cdr lst) (cons (car lst)'())) (- n 1))))))
 
 ; Call the procedure

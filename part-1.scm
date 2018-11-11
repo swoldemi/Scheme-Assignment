@@ -16,9 +16,10 @@
 ; Procedure to display all rotations of the list
 ; A list with n elements has n unique rotations
 (define (rotate lst n)
-  (cond ((> n 0) 
+  (cond ((> n 0) ; Base case
     (begin
-      (display lst)
+      (display lst) ; Display the current rotation
+      ; Decrement n and make another recursive call on the new rotation
       (rotate (append (cdr lst) (cons (car lst)'())) (- n 1))))))
 
 ; Call the procedure

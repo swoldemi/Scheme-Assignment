@@ -29,9 +29,12 @@
 
 ; Helper which takes an anonymous procedure as a string and evaluates it on args
 (define (call-string text-lambda . args)
+  ; Inner procedure `define` will read the lambda string as a stream
   (define (read-string text)
   (read
     (open-input-string text)))
+  ; Using read-string, evaludate the lambda expression within the name space using
+  ; whatever arguments were supplied (args should be a list in this case)
   (apply
     (eval (read-string text-lambda) ns)
     args))
@@ -39,7 +42,11 @@
 ; Procedure for filtering input list based on expression
 (define (bool_filter expression lst)
     (cond ((null? lst) '())
+      ; If the current head of the list causes the lambda expressoin to return true
+      ; Then construct a new list using the head and the result of
+      ; a recursive call to the this procedure
       ((call-string expression (car lst)) (cons (car lst) (bool_filter expression (cdr lst))))
+    ; If the current head does not pass the lambda expression, continue on the rest of the list
     (else (bool_filter expression (cdr lst)))))
 
 ; Call procedure on input data and display result
